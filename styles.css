@@ -367,19 +367,13 @@ body::before, body::after {
   .code-particles i:nth-child(11) { top: 16%; left: 28%; }
   .code-particles i:nth-child(12) { top: 16%; right: 28%; }
 }
-@media (max-width: 600px) {
-  .profile-pic {
-    width: 180px;   /* or any size you prefer */
-    height: 180px;
-    margin-top: 5rem; /* optional, to balance spacing */
-  }
-}
+
 /* Bigger avatar on small phones */
 @media (max-width: 600px) {
   .profile-pic {
     /* scales with screen, but never too huge */
-    width: clamp(200px, 52vw, 260px);
-    height: clamp(200px, 52vw, 260px);
+    width: clamp(180px, 52vw, 200px);
+    height: clamp(180px, 52vw, 200px);
     margin-top: 5rem; /* keep your spacing */
   }
 }
@@ -388,7 +382,7 @@ body::before, body::after {
 @media (min-width: 360px) and (max-width: 430px) {
   .profile-pic {
     /* Pixel 6 Pro (412px) -> ~247px */
-    width: clamp(220px, 60vw, 280px);
-    height: clamp(220px, 60vw, 280px);
+    width: clamp(180px, 60vw, 180px);
+    height: clamp(180px, 60vw, 180px);
   }
 }
