@@ -374,3 +374,21 @@ body::before, body::after {
     margin-top: 5rem; /* optional, to balance spacing */
   }
 }
+/* Bigger avatar on small phones */
+@media (max-width: 600px) {
+  .profile-pic {
+    /* scales with screen, but never too huge */
+    width: clamp(200px, 52vw, 260px);
+    height: clamp(200px, 52vw, 260px);
+    margin-top: 5rem; /* keep your spacing */
+  }
+}
+
+/* Extra bump for Pixel/large phones (~360–430px wide) */
+@media (min-width: 360px) and (max-width: 430px) {
+  .profile-pic {
+    /* Pixel 6 Pro (412px) -> ~247px */
+    width: clamp(220px, 60vw, 280px);
+    height: clamp(220px, 60vw, 280px);
+  }
+}
