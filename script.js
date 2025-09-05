@@ -4,6 +4,9 @@ const LINKS = {
     github: "https://github.com/rudro-kalix",
     linkedin: "https://www.portfolio.ovairal.xyz/404.html",
     twitter: "https://www.portfolio.ovairal.xyz/404.html",
+    facebook: "https://facebook.com/yourprofile",
+    whatsapp: "https://wa.me/yourphonenumber", // use intl format, no +
+    telegram: "https://t.me/yourusername",
     email: "mailto:252-35-584@diu.edu.bd"
   }
 };
@@ -23,6 +26,9 @@ function setLinks() {
   $("#githubLink").href = LINKS.socials.github;
   $("#linkedinLink").href = LINKS.socials.linkedin;
   $("#twitterLink").href = LINKS.socials.twitter;
+  $("#facebookLink").href = LINKS.socials.facebook;
+  $("#whatsappLink").href = LINKS.socials.whatsapp;
+  $("#telegramLink").href = LINKS.socials.telegram;
   $("#emailLink").href = LINKS.socials.email;
   $("#emailCta").href = LINKS.socials.email;
 }
