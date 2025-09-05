@@ -386,3 +386,40 @@ body::before, body::after {
     height: clamp(180px, 60vw, 180px);
   }
 }
+/* --- Individual floating animations --- */
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+@keyframes floatLeftRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(18px); }
+}
+@keyframes floatDiagonal {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(14px, -14px); }
+}
+@keyframes floatWobble {
+  0%, 100% { transform: rotate(0deg) translate(0,0); }
+  25% { transform: rotate(6deg) translateY(-10px); }
+  75% { transform: rotate(-6deg) translateY(10px); }
+}
+
+/* Reset icons so they don’t all share the same */
+.code-particles i {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+/* Assign different animations */
+.code-particles i:nth-child(1)  { animation: floatUpDown 6s ease-in-out infinite; }
+.code-particles i:nth-child(2)  { animation: floatLeftRight 7s ease-in-out infinite; }
+.code-particles i:nth-child(3)  { animation: floatDiagonal 8s ease-in-out infinite; }
+.code-particles i:nth-child(4)  { animation: floatWobble 9s ease-in-out infinite; }
+.code-particles i:nth-child(5)  { animation: floatUpDown 7s ease-in-out infinite reverse; }
+.code-particles i:nth-child(6)  { animation: floatLeftRight 6s ease-in-out infinite reverse; }
+.code-particles i:nth-child(7)  { animation: floatDiagonal 10s ease-in-out infinite reverse; }
+.code-particles i:nth-child(8)  { animation: floatWobble 8s ease-in-out infinite reverse; }
+/* ...continue pattern for remaining icons */
+
