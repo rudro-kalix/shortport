@@ -1,49 +1,20 @@
 [
   {
-    "semester": "Result of Summer 2025 (1st Semester)",
-    "sgpa": 3.73,
-    "total_credit": 13.0,
-    "courses": [
-      {
-        "sl": 1,
-        "code": "SE 111",
-        "title": "Computer Fundamentals",
-        "credit": 3.0,
-        "grade": "A",
-        "point": 3.75
-      },
-      {
-        "sl": 2,
-        "code": "BNS 101",
-        "title": "Bangladesh Studies",
-        "credit": 3.0,
-        "grade": "A\u2013",
-        "point": 3.5
-      },
-      {
-        "sl": 3,
-        "code": "SE 112",
-        "title": "Computer Fundamentals Lab",
-        "credit": 1.0,
-        "grade": "A\u2013",
-        "point": 3.5
-      },
-      {
-        "sl": 4,
-        "code": "SE 113",
-        "title": "Introduction to Software Engineering",
-        "credit": 3.0,
-        "grade": "A+",
-        "point": 4.0
-      },
-      {
-        "sl": 5,
-        "code": "ENG 101",
-        "title": "English I",
-        "credit": 3.0,
-        "grade": "A",
-        "point": 3.75
-      }
-    ]
+    "milestone": "Joined University",
+    "date": "May 2025",
+    "note": "Started my journey at Jatiya Kabi Kazi Nazrul Islam University with big dreams.",
+    "icon": "🎓"
+  },
+  {
+    "milestone": "1st Semester Result",
+    "date": "Summer 2025",
+    "note": "Completed my foundation semester and achieved SGPA 3.73.",
+    "icon": "📊"
+  },
+  {
+    "milestone": "2nd Semester Ongoing",
+    "date": "Fall 2025",
+    "note": "Studying heavily, focusing on Data Structures and Software Engineering.",
+    "icon": "📚"
   }
 ]

@@ -506,39 +506,47 @@ body::before, body::after {
 .course-table.neat tfoot td {
   background: rgba(124,92,255,0.1);
 }
-/* Responsive Journey Cards */
-.journey-card {
-  background: rgba(255,255,255,0.04);
-  border-radius: 12px;
-  padding: 1.2rem;
-  margin: 1rem auto 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  max-width: 900px;
-  width: 95%;           /* shrink on small screens */
-  overflow-x: auto;     /* allow horizontal scroll if content too wide */
-}
 
-/* Make tables responsive inside cards */
-.journey-card table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 500px;     /* prevent table from squishing too much */
-  display: block;       /* ensures horizontal scrolling */
-  overflow-x: auto;
-  white-space: nowrap;
-}
 
-/* Adjust typography for mobile */
-@media (max-width: 600px) {
-  .journey-header h3 {
-    font-size: 1.1rem;
-  }
-  .sgpa-badge {
-    font-size: 0.85rem;
-    padding: 0.25rem 0.6rem;
-  }
-  .course-table th, .course-table td {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.4rem;
-  }
+/* --- University Journey Timeline --- */
+#journeyTimeline {
+  position: relative;
+  margin: 2rem auto;
+  padding-left: 2rem;
+  border-left: 3px solid var(--brand);
+  max-width: 700px;
+}
+.milestone {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 2rem;
+}
+.milestone-icon {
+  position: absolute;
+  left: -35px;
+  top: 0;
+  background: var(--brand);
+  color: #fff;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(124,92,255,0.7);
+}
+.milestone-content {
+  background: rgba(255,255,255,0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.milestone-content h3 {
+  margin: 0;
+  color: var(--brand);
+}
+.milestone-date {
+  font-size: 0.9rem;
+  color: #aaa;
 }
