@@ -162,7 +162,7 @@ body::before, body::after {
 .btn { padding:.7rem 1.1rem; border-radius:var(--radius); background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; text-decoration:none; font-weight:700; }
 .btn--ghost { background:transparent; border:1px solid var(--brand); color:var(--brand); }
 .socials { list-style:none; display:flex; justify-content:center; gap:1rem; margin-top:1rem; padding:0; }
-.socials a { display:grid; place-items:center; width:50px; height:50px; border-radius:50%;  font-size:1.3rem; }
+.socials a { display:grid; place-items:center; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; font-size:1.3rem; }
 
 /* ---------------- Projects ---------------- */
 .section { padding: var(--space-section) 1rem; }
@@ -423,71 +423,45 @@ body::before, body::after {
 .code-particles i:nth-child(8)  { animation: floatWobble 8s ease-in-out infinite reverse; }
 /* ...continue pattern for remaining icons */
 
-
-/* --- Responsive Socials Layout (no color changes) --- */
-@media (min-width: 768px) {
-  .socials { display: flex; justify-content: center; flex-wrap: nowrap; gap: 1rem; }
+/* --- University Journey Timeline & Table --- */
+.timeline {
+  border-left: 3px solid var(--brand);
+  margin: 2rem auto;
+  padding-left: 1rem;
+  max-width: 640px;
 }
-
-@media (max-width: 767px) {
-  .socials {
-    display: grid;
-    grid-template-columns: repeat(5, auto); /* 5 in the first row */
-    justify-content: center;   /* center the whole grid */
-    justify-items: center;     /* center each item */
-    gap: 0.8rem;
-  }
-
-  /* Force items after the 5th onto their own rows, centered */
-  .socials li:nth-child(n+6) {
-    grid-column: span 5;      /* span full row */
-    justify-self: center;     /* stay centered in row */
-  }
+.timeline-item {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  position: relative;
 }
-  .socials li:nth-child(n+6) {
-    grid-column: span 1;   /* push remaining to the next rows */
-    justify-self: center;  /* center the last two */
-  }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 0.6rem;
+  width: 15px;
+  height: 15px;
+  background: var(--brand);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(124,92,255,0.7), 0 0 20px rgba(0,224,255,0.5);
 }
-
-
-/* --- Brand colors for icons (explicit) --- */
-.socials a#facebookLink i { color: #fff; }   /* Facebook blue */
-.socials a#whatsappLink i { color: #fff; }   /* WhatsApp green */
-.socials a#telegramLink i { color: #fff; }   /* Telegram blue */
-
-/* Ensure no generic color override on .socials a impacts icons */
-.socials a { color: inherit; }
-
-
-/* --- Official brand background colors for social containers --- */
-.socials a#facebookLink { background: #1877F2; }
-.socials a#whatsappLink { background: #25D366; }
-.socials a#telegramLink { background: #0088cc; }
-
-/* ensure icon center line-height */
-.socials a { line-height: 50px; }
-.socials a i { line-height: 1; }
-
-
-/* --- Honeycomb Layout for Socials --- */
-@media (max-width: 767px) {
-  .socials {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6rem;
-    max-width: 340px; /* keeps it compact */
-    margin: 0 auto;
-  }
-
-  .socials li {
-    margin: 0.25rem;
-  }
-
-  /* Shift the 2nd row inward for honeycomb effect */
-  .socials li:nth-child(6),
-  .socials li:nth-child(7) {
-    margin-left: 2.2rem; /* adjust spacing for perfect honeycomb */
-  }
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+.course-table th,
+.course-table td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+}
+.course-table th {
+  background: var(--surface);
+  font-weight: 600;
+}
+.course-table tr:nth-child(even) {
+  background: rgba(255,255,255,0.03);
 }
