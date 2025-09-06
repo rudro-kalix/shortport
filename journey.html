@@ -4,25 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My University Journey</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Unique Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Merriweather:wght@700;900&family=Pacifico&display=swap" rel="stylesheet">
+
+  
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main id="journey">
     <section class="section">
       <div class="container">
-        <div class="journey-header">
-  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Daffodil_International_University_Monogram.svg/1200px-Daffodil_International_University_Monogram.svg.png" alt="DIU Logo" class="journey-logo">
-  <div class="journey-title">
-    <h2>My University Journey</h2>
-    <p>BSc in Software Engineering @ Daffodil International University</p>
-  </div>
-</div>
+        <!-- Header Section -->
+        <div class="journey-header glass">
+          <!-- DIU Logo -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Daffodil_International_University_Monogram.svg/1200px-Daffodil_International_University_Monogram.svg.png"
+            alt="Daffodil International University"
+            class="journey-logo"
+            loading="lazy"
+          />
 
+          <!-- Title + Subtitle -->
+          <div class="journey-title">
+            <h2>My University Journey</h2>
+            <p>BSc in Software Engineering @ Daffodil International University</p>
+          </div>
+        </div>
+
+        <!-- Timeline placeholder -->
         <div id="journeyTimeline"></div>
       </div>
     </section>
   </main>
+
+  <!-- Journey JS -->
   <script src="journey.js"></script>
 </body>
 </html>

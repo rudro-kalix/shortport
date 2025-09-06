@@ -831,31 +831,40 @@ body::before, body::after {
   100% { text-shadow: 0 0 20px rgba(124,92,255,0.7), 0 0 40px rgba(0,224,255,0.5); }
 }
 /* --- Journey Page Header --- */
-/* --- Eye-catching Journey Header --- */
+/* --- Ultra Eye-Catching Journey Heading --- */
 .journey-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
 .journey-logo {
-  width: 90px;
+  width: 95px;
   height: auto;
-  filter: drop-shadow(0 0 12px rgba(124,92,255,0.7));
+  filter: drop-shadow(0 0 14px rgba(124,92,255,0.75));
 }
 
 .journey-title h2 {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   font-weight: 900;
-  background: linear-gradient(90deg, #7c5cff, #00e0ff);
+  text-transform: uppercase;
+  background: linear-gradient(
+    270deg,
+    #7c5cff,
+    #00e0ff,
+    #ff3db5,
+    #7c5cff
+  );
+  background-size: 600% 600%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
+  animation: gradientFlow 6s ease infinite;
+  letter-spacing: 2px;
   margin: 0;
-  animation: glowPulse 3s ease-in-out infinite;
+  position: relative;
 }
 
 .journey-title h2::after {
@@ -863,33 +872,209 @@ body::before, body::after {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -8px;
-  width: 80%;
-  height: 4px;
-  background: linear-gradient(90deg, #00e0ff, #7c5cff);
-  border-radius: 2px;
-  box-shadow: 0 0 18px rgba(0,224,255,.7);
-}
-
-.journey-title {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 1rem;
+  bottom: -10px;
+  width: 70%;
+  height: 5px;
+  background: linear-gradient(90deg, #00e0ff, #ff3db5);
+  border-radius: 3px;
+  box-shadow: 0 0 20px rgba(255, 61, 181, 0.7);
 }
 
 .journey-title p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  background: linear-gradient(90deg, #ff7ee2, #ffd86f);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-top: 0.7rem;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 20px rgba(255, 126, 226, 0.4);
+  color: #eee;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  text-shadow: 0 0 12px rgba(0,224,255,0.6), 0 0 18px rgba(255,61,181,0.4);
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Glow animation */
-@keyframes glowPulse {
-  0%, 100% { text-shadow: 0 0 15px rgba(124,92,255,0.8), 0 0 30px rgba(0,224,255,0.6); }
-  50% { text-shadow: 0 0 25px rgba(124,92,255,1), 0 0 50px rgba(0,224,255,0.8); }
+/* Gradient flowing animation */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* =====================
+   ⚡ Performance Helpers
+   ===================== */
+
+/* Avoid layout/paint cost until scrolled into view */
+.section, .projects-box, .about-top, #journeyTimeline, .milestone, .card {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px 800px; /* fallback size to prevent jumps */
+}
+
+/* Prefer GPU-friendly transforms only; tone down super heavy shadows on mobile */
+@media (max-width: 600px) {
+  .card, .projects-box, .about-top, .milestone-content {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  }
+}
+
+/* Respect user's reduced motion setting: pause heavy animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  body { animation: none !important; }
+  body::before, body::after { animation: none !important; }
+  .code-particles i { animation: none !important; }
+  .journey-title h2 { animation: none !important; }
+  #journey h2 { animation: none !important; }
+}
+
+/* Lower baseline animation workload slightly for all devices */
+body { animation-duration: 45s; }            /* was ~30s */
+.code-particles i { animation-duration: calc(1.15 * 8s); } /* slower, lighter */
+
+/* ======== Smoothness Helpers (non-breaking) ======== */
+
+/* Promote hover elements to their own layers and hint transforms */
+.card,
+.card a.btn,
+.btn,
+.toggle-result {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Pause animations when the section is off-screen (via script) */
+.about-top .code-particles,
+#journeyTimeline,
+#journey h2,
+.journey-title h2 {
+  animation-play-state: paused;
+}
+.about-top .code-particles.animating,
+#journeyTimeline.animating,
+#journey h2.animating,
+.journey-title h2.animating {
+  animation-play-state: running;
+}
+
+/* Tighten hover shadows slightly (same look, cheaper paint) */
+.card:hover {
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.32),
+    0 0 16px rgba(124,92,255,0.28);
+}
+
+/* Projects grid: avoid reflow spikes during hover animations */
+#projects .grid { contain: layout paint; }
+
+/* -------- Low-performance mode (auto via script) -------- */
+:root[data-lowperf] body {
+  animation-duration: 70s;           /* slower gradient sweep */
+}
+:root[data-lowperf] .code-particles i {
+  animation-duration: 12s !important; /* calmer floats */
+  opacity: 0.7;
+}
+:root[data-lowperf] .projects-box,
+:root[data-lowperf] .card,
+:root[data-lowperf] .about-top,
+:root[data-lowperf] .milestone-content {
+  /* keep the same vibe but reduce the cost */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-color: rgba(255,255,255,0.10);
+}
+
+/* Tone down the heaviest glow/pulse effects in lowperf */
+:root[data-lowperf] #journey h2,
+:root[data-lowperf] .journey-title h2 {
+  text-shadow: 0 0 14px rgba(124,92,255,0.55), 0 0 24px rgba(0,224,255,0.4);
+}
+:root[data-lowperf] .milestone::before {
+  animation-duration: 3.2s; /* slower pulse */
+}
+
+/* Extra mobile protection: fewer floating icons when viewport is short */
+@media (max-height: 700px) {
+  .code-particles i:nth-child(n+13) { display: none !important; }
+}
+
+/* Journey result table containment (safety) */
+.milestone .result-table {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* --- Glass card for journey header (non-breaking) --- */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* Pause heading animation when not in view */
+.journey-title h2 { animation-play-state: paused; }
+.journey-title h2.animating { animation-play-state: running; }
+
+/* Low-perf: disable expensive filters/shadows on Journey */
+:root[data-lowperf] .glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+:root[data-lowperf] .milestone-content,
+:root[data-lowperf] .milestone-icon {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.22);
+}
+:root[data-lowperf] #journey h2,
+:root[data-lowperf] .journey-title h2 {
+  animation-duration: 9s; /* slower glow */
+  text-shadow: 0 0 10px rgba(124,92,255,0.55), 0 0 18px rgba(0,224,255,0.35);
+}
+
+
+/* --- Fix Journey path/icon stacking --- */
+#journeyTimeline { position: relative; z-index: 0; }                 /* base */
+#journeyTimeline::before { z-index: 0; position: absolute; }         /* path line */
+
+.milestone { position: relative; }                                   /* ensure a stacking context */
+.milestone::before { z-index: 1; position: absolute; }               /* numbered step dot */
+.milestone-icon { z-index: 2; position: absolute; }                  /* FA circle icon stays on top */
+.milestone-content { position: relative; z-index: 1; }               /* card above path line */
+/* --- Journey icons: always visible and on top --- */
+
+/* 1) Undo content-visibility on timeline/milestones so abs-pos icons paint reliably */
+#journeyTimeline,
+#journeyTimeline .milestone {
+  content-visibility: visible;           /* override perf helper for this block */
+  contain-intrinsic-size: auto;          /* cancel the placeholder size */
+  overflow: visible;                     /* allow icon to sit outside the left padding */
+}
+
+/* 2) Explicit stacking order: path line lowest, step dot above, card above, icon on top */
+#journeyTimeline { position: relative; z-index: 0; }
+#journeyTimeline::before { position: absolute; z-index: 0; }  /* vertical path */
+.milestone { position: relative; z-index: 0; }
+.milestone::before { position: absolute; z-index: 1; }        /* numbered step dot */
+.milestone-content { position: relative; z-index: 1; }
+.milestone-icon { position: absolute; z-index: 3; pointer-events: none; }
+
+/* 3) Ensure icon sits visually over the path at the expected spot */
+.milestone-icon {
+  left: -36px;        /* keep your existing layout */
+  top: 34px;
+}
+
+/* 4) Safety: if low-perf mode is on, keep the icon still prominent (no style changes) */
+:root[data-lowperf] .milestone-icon {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.22); /* cheaper, still visible */
 }
