@@ -465,3 +465,44 @@ body::before, body::after {
 .course-table tr:nth-child(even) {
   background: rgba(255,255,255,0.03);
 }
+
+
+/* Journey Cards */
+.journey-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.journey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sgpa-badge {
+  background: var(--brand);
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* Neater Table */
+.course-table.neat th {
+  background: var(--surface);
+  color: var(--brand);
+  font-size: 0.95rem;
+}
+.course-table.neat td.course-title {
+  text-align: left;
+}
+.course-table.neat tr:nth-child(even) {
+  background: rgba(255,255,255,0.05);
+}
+.course-table.neat tfoot td {
+  background: rgba(124,92,255,0.1);
+}
