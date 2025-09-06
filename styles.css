@@ -803,3 +803,93 @@ body::before, body::after {
   border-collapse: collapse;
   min-width: 500px;
 }
+/* Eye-catching Journey heading */
+#journey h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 800;
+  background: linear-gradient(90deg, #7c5cff, #00e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1.2px;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 20px rgba(124,92,255,0.7), 0 0 40px rgba(0,224,255,0.5);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+#journey p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #bbb;
+  margin-bottom: 2rem;
+}
+
+/* Subtle glow animation */
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 20px rgba(124,92,255,0.7), 0 0 40px rgba(0,224,255,0.5); }
+  50% { text-shadow: 0 0 30px rgba(124,92,255,1), 0 0 60px rgba(0,224,255,0.8); }
+  100% { text-shadow: 0 0 20px rgba(124,92,255,0.7), 0 0 40px rgba(0,224,255,0.5); }
+}
+/* --- Journey Page Header --- */
+/* --- Eye-catching Journey Header --- */
+.journey-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.journey-logo {
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(124,92,255,0.7));
+}
+
+.journey-title h2 {
+  font-size: 2.6rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #7c5cff, #00e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  margin: 0;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.journey-title h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg, #00e0ff, #7c5cff);
+  border-radius: 2px;
+  box-shadow: 0 0 18px rgba(0,224,255,.7);
+}
+
+.journey-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+
+.journey-title p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff7ee2, #ffd86f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 0.7rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(255, 126, 226, 0.4);
+}
+
+/* Glow animation */
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 15px rgba(124,92,255,0.8), 0 0 30px rgba(0,224,255,0.6); }
+  50% { text-shadow: 0 0 25px rgba(124,92,255,1), 0 0 50px rgba(0,224,255,0.8); }
+}
