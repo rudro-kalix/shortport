@@ -2,6 +2,9 @@
 fetch("journey.json")
   .then(res => res.json())
   .then(data => {
+    // Apply persisted theme and wire toggle (journey page may load standalone)
+    initTheme();
+    wireThemeToggle();
     const container = document.getElementById("journeyTimeline");
     container.innerHTML = "";
     
