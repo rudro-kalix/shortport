@@ -1,29 +1,29 @@
 [
   {
-    "milestone": "Joined University",
+    "milestone": "University Journey Begins",
     "date": "May 2025",
-    "note": "Started my journey at Daffodil International University with big dreams.",
+    "note": "Enrolled in BSc Software Engineering at Daffodil International University. Excited to start my journey in the world of technology and innovation.",
     "icon": "graduation-cap"
   },
   {
-    "milestone": "1st Semester Result",
+    "milestone": "First Semester Completed",
     "date": "Summer 2025",
-    "note": "Completed my foundation semester and achieved SGPA 3.73.",
-    "icon": "chart-line",
+    "note": "Successfully completed my first semester with a strong SGPA of 3.73. Gained solid foundation in computer fundamentals and software engineering concepts.",
+    "icon": "trophy",
     "sgpa": 3.73,
     "total_credit": 13.00,
     "courses": [
-      { "sl": 1, "code": "SE 111", "title": "Computer Fundamentals", "credit": 3.00, "grade": "A",  "point": 3.75 },
-      { "sl": 2, "code": "BNS 101","title": "Bangladesh Studies", "credit": 3.00, "grade": "A–", "point": 3.50 },
+      { "sl": 1, "code": "SE 111", "title": "Computer Fundamentals", "credit": 3.00, "grade": "A", "point": 3.75 },
+      { "sl": 2, "code": "BNS 101", "title": "Bangladesh Studies", "credit": 3.00, "grade": "A–", "point": 3.50 },
       { "sl": 3, "code": "SE 112", "title": "Computer Fundamentals Lab", "credit": 1.00, "grade": "A–", "point": 3.50 },
       { "sl": 4, "code": "SE 113", "title": "Introduction to Software Engineering", "credit": 3.00, "grade": "A+", "point": 4.00 },
-      { "sl": 5, "code": "ENG 101","title": "English I", "credit": 3.00, "grade": "A",  "point": 3.75 }
+      { "sl": 5, "code": "ENG 101", "title": "English I", "credit": 3.00, "grade": "A", "point": 3.75 }
     ]
   },
   {
-    "milestone": "2nd Semester Ongoing",
+    "milestone": "Second Semester Ongoing",
     "date": "Fall 2025",
-    "note": "Studying heavily, focusing on Data Structures and Software Engineering.",
+    "note": "Currently studying in my second semester, focusing on programming languages, data structures, and building practical skills. Working hard to maintain and improve my academic performance.",
     "icon": "book-open"
   }
 ]
