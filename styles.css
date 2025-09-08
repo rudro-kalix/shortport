@@ -389,10 +389,12 @@ body::before, body::after { display: none; }
 }
 .code-particles i {
   position: absolute;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   opacity: 0.25;
   animation: none;
 }
+/* Make floating icons behind the profile picture larger in the hero/about section */
+.about-top .code-particles i { font-size: 3rem; }
 @keyframes floatIcon {
   0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
   25%  { transform: translateY(-20px) rotate(8deg); opacity: 1; }
@@ -731,10 +733,11 @@ body::before, body::after { display: none; }
   .socials a { width: 48px; height: 48px; font-size: 1.2rem; }
   /* Make icons smaller and reduce count */
   .code-particles i {
-    font-size: 1.15rem;      /* smaller so they don't touch */
+    font-size: 1.3rem;       /* slightly bigger but still safe on mobile */
     opacity: 0.7;
     animation-duration: 16s; /* a bit calmer on mobile */
   }
+  .about-top .code-particles i { font-size: 1.8rem; }
 
   /* Hide extra icons — keep only the first 8 (enough to feel lively) */
   .code-particles i:nth-child(n+9) {
