@@ -733,11 +733,11 @@ body::before, body::after { display: none; }
   .socials a { width: 48px; height: 48px; font-size: 1.2rem; }
   /* Make icons smaller and reduce count */
   .code-particles i {
-    font-size: 1.3rem;       /* slightly bigger but still safe on mobile */
+    font-size: 1.8rem;       /* match desktop size on mobile */
     opacity: 0.7;
     animation-duration: 16s; /* a bit calmer on mobile */
   }
-  .about-top .code-particles i { font-size: 1.8rem; }
+  .about-top .code-particles i { font-size: 3rem; }  /* match desktop size on mobile */
 
   /* Hide extra icons — keep only the first 8 (enough to feel lively) */
   .code-particles i:nth-child(n+9) {
