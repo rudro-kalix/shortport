@@ -1,48 +1,7 @@
 // Enhanced journey timeline with scroll animations + smoother scroll handling
-const FALLBACK_JOURNEY = [
-  {
-    milestone: "University Journey Begins",
-    date: "May 2025",
-    note: "Enrolled in BSc Software Engineering at Daffodil International University. Excited to start my journey in the world of technology and innovation.",
-    icon: "graduation-cap"
-  },
-  {
-    milestone: "First Semester Completed",
-    date: "Summer 2025",
-    note: "Successfully completed my first semester with a strong SGPA of 3.73. Gained solid foundation in computer fundamentals and software engineering concepts.",
-    icon: "trophy",
-    sgpa: 3.73,
-    total_credit: 13.00,
-    courses: [
-      { sl: 1, code: "SE 111", title: "Computer Fundamentals", credit: 3.00, grade: "A", point: 3.75 },
-      { sl: 2, code: "BNS 101", title: "Bangladesh Studies", credit: 3.00, grade: "A–", point: 3.50 },
-      { sl: 3, code: "SE 112", title: "Computer Fundamentals Lab", credit: 1.00, grade: "A–", point: 3.50 },
-      { sl: 4, code: "SE 113", title: "Introduction to Software Engineering", credit: 3.00, grade: "A+", point: 4.00 },
-      { sl: 5, code: "ENG 101", title: "English I", credit: 3.00, grade: "A", point: 3.75 }
-    ]
-  },
-  {
-    milestone: "Second Semester Ongoing",
-    date: "Fall 2025",
-    note: "Currently studying in my second semester, focusing on programming languages, data structures, and building practical skills. Working hard to maintain and improve my academic performance.",
-    icon: "book-open"
-  }
-];
-
-async function loadJourneyData() {
-  try {
-    const res = await fetch("journey.json");
-    if (!res.ok) throw new Error(`Bad response: ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.warn("Falling back to bundled journey data:", err);
-    return FALLBACK_JOURNEY;
-  }
-}
-
 (async function initJourneyPage() {
   try {
-    const data = await loadJourneyData();
+    const data = await fetch("journey.json").then(res => res.json());
 
     // Apply persisted theme and wire toggle (journey page may load standalone)
     initTheme();
@@ -205,6 +164,31 @@ function wireJourneyObservers() {
     observer.observe(milestone);
   });
 }
+  });
+}
+
+function wireJourneyObservers() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('animating');
+      } else {
+        entry.target.style.animationPlayState = 'paused';
+        entry.target.classList.remove('animating');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.milestone').forEach(milestone => {
+    observer.observe(milestone);
+  });
+}
 
 // Add a progress indicator showing journey completion based on 12 semesters
 function addProgressIndicator() {
@@ -243,6 +227,7 @@ function addProgressIndicator() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
     const scrollPercent = (scrollTop / scrollableHeight);
     const clamped = Math.min(scrollPercent, 1);
+    const scrollPercent = (scrollTop / scrollableHeight) * 100;
     
     // Visual progress based on scroll (GPU-friendly transform)
     progressFill.style.transform = `scaleX(${clamped})`;
