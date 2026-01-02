@@ -202,6 +202,7 @@ function addProgressIndicator() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
     const scrollPercent = (scrollTop / scrollableHeight);
     const clamped = Math.min(scrollPercent, 1);
+    const scrollPercent = (scrollTop / scrollableHeight) * 100;
     
     // Visual progress based on scroll (GPU-friendly transform)
     progressFill.style.transform = `scaleX(${clamped})`;
