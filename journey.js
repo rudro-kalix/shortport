@@ -164,6 +164,31 @@ function wireJourneyObservers() {
     observer.observe(milestone);
   });
 }
+  });
+}
+
+function wireJourneyObservers() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('animating');
+      } else {
+        entry.target.style.animationPlayState = 'paused';
+        entry.target.classList.remove('animating');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.milestone').forEach(milestone => {
+    observer.observe(milestone);
+  });
+}
 
 // Add a progress indicator showing journey completion based on 12 semesters
 function addProgressIndicator() {
