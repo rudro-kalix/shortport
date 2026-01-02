@@ -90,19 +90,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Hide scroll indicator when scrolling (only on journey page)
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-  const scrollIndicator = document.querySelector('.scroll-indicator');
-  if (scrollIndicator && document.getElementById('journey')) {
-    scrollIndicator.style.opacity = '0';
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      scrollIndicator.style.opacity = '0.7';
-    }, 1000);
-  }
-});
-
 window.addEventListener("DOMContentLoaded", () => {
   setLinks();
   yearStamp();
