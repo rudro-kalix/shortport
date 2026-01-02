@@ -1,13 +1,18 @@
-// Enhanced journey timeline with scroll animations
-fetch("journey.json")
-  .then(res => res.json())
-  .then(data => {
+// Enhanced journey timeline with scroll animations + smoother scroll handling
+(async function initJourneyPage() {
+  try {
+    const data = await fetch("journey.json").then(res => res.json());
+
     // Apply persisted theme and wire toggle (journey page may load standalone)
     initTheme();
     wireThemeToggle();
+
     const container = document.getElementById("journeyTimeline");
+    if (!container) return;
     container.innerHTML = "";
-    
+
+    const frag = document.createDocumentFragment();
+
     data.forEach((step, idx) => {
       const div = document.createElement("div");
       div.className = "milestone";
@@ -76,69 +81,93 @@ fetch("journey.json")
           ${resultHTML}
         </div>
       `;
-      container.appendChild(div);
+      frag.appendChild(div);
     });
 
-    // Enhanced toggle functionality with smooth animations
-    document.querySelectorAll(".toggle-result").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const panel = btn.nextElementSibling;
-        const isHidden = panel.classList.toggle("hidden");
-        
-        // Smooth animation for panel reveal
-        if (!isHidden) {
-          panel.style.opacity = '0';
-          panel.style.transform = 'translateY(-10px)';
-          panel.style.transition = 'all 0.3s ease';
-          
-          setTimeout(() => {
-            panel.style.opacity = '1';
-            panel.style.transform = 'translateY(0)';
-          }, 10);
-        }
-        
-        btn.innerHTML = isHidden
-          ? '<i class="fa-solid fa-chart-line"></i> View Detailed Results'
-          : '<i class="fa-solid fa-eye-slash"></i> Hide Results';
-        btn.setAttribute("aria-expanded", String(!isHidden));
-        panel.setAttribute("aria-hidden", String(isHidden));
-      });
-    });
+    container.appendChild(frag);
 
-    // Scroll-triggered animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+    const { updateProgress, recalcScrollable } = addProgressIndicator();
+    const refreshProgress = () => {
+      recalcScrollable();
+      updateProgress();
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          entry.target.classList.add('animating');
-        } else {
-          entry.target.style.animationPlayState = 'paused';
-          entry.target.classList.remove('animating');
-        }
-      });
-    }, observerOptions);
+    // Enhanced toggle functionality with smoother updates
+    setupResultToggles(refreshProgress);
 
-    // Observe timeline elements
-    document.querySelectorAll('.milestone').forEach(milestone => {
-      observer.observe(milestone);
+    // Scroll-triggered animations
+    wireJourneyObservers();
+
+    // Single, throttled scroll lane for progress + indicator
+    const indicatorController = setupScrollIndicator();
+    setupScrollPipeline(() => {
+      updateProgress();
+      indicatorController.onScroll();
+    }, () => {
+      recalcScrollable();
+      updateProgress();
     });
+  } catch (err) {
+    console.error("Failed to load journey data", err);
+  }
+})();
 
-    // Add progress indicator
-    addProgressIndicator();
-    
-    // Add scroll indicator functionality
-    addScrollIndicator();
+function setupResultToggles(onHeightChange) {
+  document.querySelectorAll(".toggle-result").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const panel = btn.nextElementSibling;
+      const isHidden = panel.classList.toggle("hidden");
+
+      if (!isHidden) {
+        panel.style.opacity = '0';
+        panel.style.transform = 'translateY(-10px)';
+        panel.style.transition = 'all 0.3s ease';
+
+        requestAnimationFrame(() => {
+          panel.style.opacity = '1';
+          panel.style.transform = 'translateY(0)';
+        });
+      }
+
+      btn.innerHTML = isHidden
+        ? '<i class="fa-solid fa-chart-line"></i> View Detailed Results'
+        : '<i class="fa-solid fa-eye-slash"></i> Hide Results';
+      btn.setAttribute("aria-expanded", String(!isHidden));
+      panel.setAttribute("aria-hidden", String(isHidden));
+
+      if (typeof onHeightChange === "function") {
+        requestAnimationFrame(onHeightChange);
+      }
+    });
   });
+}
+
+function wireJourneyObservers() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('animating');
+      } else {
+        entry.target.style.animationPlayState = 'paused';
+        entry.target.classList.remove('animating');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.milestone').forEach(milestone => {
+    observer.observe(milestone);
+  });
+}
 
 // Add a progress indicator showing journey completion based on 12 semesters
 function addProgressIndicator() {
   const timeline = document.getElementById("journeyTimeline");
-  const milestones = timeline.querySelectorAll('.milestone');
   const totalSemesters = 12; // Total semesters in BSc Software Engineering
   const completedSemesters = 1; // Currently completed 1 semester
   
@@ -157,16 +186,21 @@ function addProgressIndicator() {
   `;
   
   timeline.parentNode.insertBefore(progressBar, timeline);
+
+  const progressFill = progressBar.querySelector('.progress-fill');
+  const progressPercentage = progressBar.querySelector('.progress-percentage');
+  const progressDetail = progressBar.querySelector('.progress-detail');
+
+  let scrollableHeight = 1;
+
+  const recalcScrollable = () => {
+    scrollableHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  };
   
   // Update progress on scroll (visual effect)
   const updateProgress = () => {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    
-    const progressFill = progressBar.querySelector('.progress-fill');
-    const progressPercentage = progressBar.querySelector('.progress-percentage');
-    const progressDetail = progressBar.querySelector('.progress-detail');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const scrollPercent = (scrollTop / scrollableHeight) * 100;
     
     // Visual progress based on scroll
     progressFill.style.width = `${Math.min(scrollPercent, 100)}%`;
@@ -176,22 +210,57 @@ function addProgressIndicator() {
     progressPercentage.textContent = `${academicProgress}%`;
     progressDetail.textContent = `(${completedSemesters}/${totalSemesters} semesters completed)`;
   };
-  
-  window.addEventListener('scroll', updateProgress);
+
+  recalcScrollable();
   updateProgress();
+
+  return { updateProgress, recalcScrollable };
 }
 
-// Add scroll indicator functionality for journey page
-function addScrollIndicator() {
+function setupScrollIndicator() {
+  const scrollIndicator = document.querySelector('.scroll-indicator');
   let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-      scrollIndicator.style.opacity = '0';
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        scrollIndicator.style.opacity = '0.7';
-      }, 1000);
+
+  const setOpacity = (value) => {
+    if (scrollIndicator) scrollIndicator.style.opacity = value;
+  };
+
+  const onScroll = () => {
+    if (!scrollIndicator) return;
+    setOpacity('0');
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      setOpacity('0.7');
+    }, 900);
+  };
+
+  // Ensure initial visibility
+  setOpacity(scrollIndicator ? '0.7' : '0');
+
+  return { onScroll };
+}
+
+function setupScrollPipeline(onScroll, onResize) {
+  let ticking = false;
+
+  const run = () => {
+    ticking = false;
+    onScroll();
+  };
+
+  const handleScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(run);
     }
-  });
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    onResize();
+    handleScroll();
+  }, { passive: true });
+
+  // Initial paint
+  handleScroll();
 }
