@@ -200,10 +200,12 @@ function addProgressIndicator() {
   // Update progress on scroll (visual effect)
   const updateProgress = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const scrollPercent = (scrollTop / scrollableHeight);
+    const clamped = Math.min(scrollPercent, 1);
     const scrollPercent = (scrollTop / scrollableHeight) * 100;
     
-    // Visual progress based on scroll
-    progressFill.style.width = `${Math.min(scrollPercent, 100)}%`;
+    // Visual progress based on scroll (GPU-friendly transform)
+    progressFill.style.transform = `scaleX(${clamped})`;
     
     // Academic progress (static based on completed semesters)
     const academicProgress = Math.round((completedSemesters / totalSemesters) * 100);
