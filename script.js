@@ -1,5 +1,5 @@
 const LINKS = {
-  fullPortfolio: "https://www.portfolio.ovairal.xyz/",
+  fullPortfolio: "https://www.imrudro.dev/",
   socials: {
     github: "https://github.com/rudro-kalix",
     linkedin: "https://www.portfolio.ovairal.xyz/404.html",
