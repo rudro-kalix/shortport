@@ -1,180 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Journey to Data Science</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Building My Path to Data Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#050816',
+            panel: '#0d1328',
+            accent: '#60a5fa',
+            accent2: '#8b5cf6'
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(96,165,250,.55), 0 0 35px rgba(96,165,250,.25)'
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --bg: #070b16;
-      --bg-soft: #101729;
-      --card: rgba(20, 30, 56, 0.55);
-      --line: rgba(96, 165, 250, 0.36);
-      --text: #eaf2ff;
-      --muted: #9cb0d1;
-      --accent: #60a5fa;
-      --accent-2: #8b5cf6;
-      --good: #34d399;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at 20% 10%, rgba(96,165,250,.16), transparent 35%), radial-gradient(circle at 82% 8%, rgba(139,92,246,.16), transparent 30%), var(--bg);
-    }
-    .progress { position: fixed; top: 0; left: 0; height: 4px; width: 0; z-index: 99; background: linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow: 0 0 18px rgba(96,165,250,.7); }
-    .container { width: min(1120px, 92%); margin: 0 auto; }
-    section { padding: 80px 0; }
-    .glass { background: var(--card); border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(12px); border-radius: 18px; box-shadow: 0 12px 40px rgba(5,10,22,.45); }
-    h1, h2, h3 { margin: 0 0 14px; }
-    p { color: var(--muted); line-height: 1.65; margin: 0; }
-
-    .hero { min-height: 100vh; display: grid; align-items: center; position: relative; overflow: hidden; }
-    .hero::before, .hero::after { content: ""; position: absolute; width: 420px; height: 420px; filter: blur(80px); border-radius: 50%; z-index: -1; }
-    .hero::before { background: rgba(96,165,250,.22); top: -140px; left: -120px; }
-    .hero::after { background: rgba(139,92,246,.24); right: -130px; bottom: -150px; }
-    .hero-card { padding: 42px; text-align: center; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.02em; }
-    .typing { color: #bcd0ff; min-height: 1.75em; font-weight: 600; }
-
-    .section-title { font-size: clamp(1.5rem, 4vw, 2.4rem); margin-bottom: 12px; }
-    .section-sub { margin-bottom: 32px; }
-
-    .timeline { position: relative; margin-left: 16px; }
-    .timeline-line { position: absolute; left: 14px; top: 0; width: 3px; height: 100%; background: rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; }
-    .timeline-fill { width: 100%; height: 0; background: linear-gradient(var(--accent), var(--accent-2)); transition: height .2s linear; }
-    .item { position: relative; margin: 22px 0 22px 42px; padding: 22px; transition: transform .25s ease, border-color .25s ease; }
-    .item::before { content: attr(data-icon); position: absolute; left: -44px; top: 20px; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #112246; border: 1px solid var(--line); }
-    .item:hover { transform: translateY(-4px); border-color: rgba(96,165,250,.5); }
-
-    .roadmap-grid, .skills-grid, .projects-grid { display: grid; gap: 16px; }
-    .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-    .card { padding: 22px; transition: .3s ease; }
-    .card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,.55); }
-    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
-    li { margin: 6px 0; }
-
-    .meter { height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; margin-top: 12px; }
-    .meter > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--accent),var(--accent-2)); }
-
-    .project-meta { font-size: .85rem; color: #b4c6e8; margin: 12px 0 14px; }
-    .btn { display: inline-block; color: #e8f2ff; text-decoration: none; padding: 9px 14px; border-radius: 10px; border: 1px solid rgba(96,165,250,.45); }
-    .btn:hover { background: rgba(96,165,250,.13); }
-
-    .vision { text-align: center; padding: 34px; }
-
-    .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
-    .reveal.show { opacity: 1; transform: none; }
-
-    @media (max-width: 900px) {
-      .roadmap-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 640px) {
-      section { padding: 60px 0; }
-      .hero-card { padding: 28px; }
-      .roadmap-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr; }
-    }
+    .reveal{opacity:0;transform:translateY(22px);transition:.7s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    .grid-bg{background-image: radial-gradient(circle at 20% 0%, rgba(96,165,250,.16), transparent 30%), radial-gradient(circle at 80% 10%, rgba(139,92,246,.16), transparent 30%)}
   </style>
 </head>
-<body>
-  <div class="progress" id="scrollProgress"></div>
+<body class="bg-base text-slate-100 antialiased grid-bg">
+  <div id="scrollBar" class="fixed top-0 left-0 h-1 w-0 z-50 bg-gradient-to-r from-accent to-accent2"></div>
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-card glass reveal">
-        <h1>My Journey to Data Science</h1>
-        <p class="typing" id="typingText"></p>
-        <p>Started June 2025 | SWE Student | Future Data Scientist</p>
+  <main class="max-w-6xl mx-auto px-5 sm:px-8">
+    <section class="min-h-screen flex items-center py-20">
+      <div class="w-full text-center reveal">
+        <p class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/60 border border-slate-700 text-sm text-slate-300">Live Student Journey</p>
+        <h1 class="mt-6 text-4xl sm:text-6xl font-bold leading-tight">Building My Path to Data Science</h1>
+        <p id="heroSub" class="mt-5 text-slate-300 text-lg sm:text-xl min-h-[2rem]"></p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#journey" class="px-7 py-3 rounded-xl bg-gradient-to-r from-accent to-accent2 font-semibold hover:opacity-90 transition">View Journey</a>
+          <a href="#cta" class="px-7 py-3 rounded-xl border border-slate-600 bg-slate-900/60 hover:border-accent transition">Connect</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="container">
-    <h2 class="section-title reveal">Journey Timeline</h2>
-    <p class="section-sub reveal">From first code to industry-ready data science impact.</p>
-    <div class="timeline" id="timelineSection">
-      <div class="timeline-line"><div class="timeline-fill" id="timelineFill"></div></div>
-      <article class="item glass reveal" data-icon="🚀"><h3>2025 — Joined SWE</h3><p>Started Software Engineering at Daffodil International University and built core programming habits.</p></article>
-      <article class="item glass reveal" data-icon="🧠"><h3>2026 — DSA + Python + Projects</h3><p>Deepening algorithmic thinking, practicing Python daily, and shipping practical academic projects.</p></article>
-      <article class="item glass reveal" data-icon="🔬"><h3>2027 — Internships + Specialization</h3><p>Targeting real-world internships while specializing in data analysis, ML workflows, and model evaluation.</p></article>
-      <article class="item glass reveal" data-icon="🏁"><h3>2028 — Career-Ready Data Scientist</h3><p>Transitioning into a job-ready ML/Data Scientist profile with portfolio evidence and interview readiness.</p></article>
-    </div>
-  </section>
+    <section class="py-14" id="identity">
+      <div class="reveal rounded-2xl border border-slate-700 bg-panel/70 p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-semibold">Identity</h2>
+        <p class="mt-3 text-slate-300">I started my Software Engineering journey in June 2025 at Daffodil International University. My long-term goal is to become a Data Scientist who solves meaningful problems through data, research, and machine learning systems.</p>
+      </div>
+    </section>
 
-  <section class="container">
-    <h2 class="section-title reveal">Strategic Roadmap</h2>
-    <div class="roadmap-grid">
-      <div class="card glass reveal"><h3>📘 Learning Phase</h3><ul><li>Master SWE fundamentals</li><li>Build strong math + statistics base</li><li>Practice clean coding habits</li></ul></div>
-      <div class="card glass reveal"><h3>🧩 Skill Building Phase</h3><ul><li>Python ecosystem (NumPy, Pandas)</li><li>DSA problem solving consistency</li><li>Mini projects every semester</li></ul></div>
-      <div class="card glass reveal"><h3>🔭 Research Phase</h3><ul><li>Explore ML papers and benchmarks</li><li>Work with real datasets</li><li>Experiment tracking + reporting</li></ul></div>
-      <div class="card glass reveal"><h3>💼 Career Phase</h3><ul><li>Internships + industry mentorship</li><li>Portfolio and GitHub optimization</li><li>Interview and collaboration readiness</li></ul></div>
-    </div>
-  </section>
+    <section class="py-14" id="journey">
+      <h2 class="text-2xl sm:text-3xl font-semibold reveal">Journey Timeline</h2>
+      <div class="relative mt-8 pl-6 sm:pl-10">
+        <div class="absolute left-1 sm:left-3 top-0 bottom-0 w-0.5 bg-slate-700"></div>
+        <div class="space-y-5">
+          <article class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5 hover:-translate-y-1 hover:border-accent transition"><p class="text-accent font-semibold">2025</p><p class="mt-1 text-slate-300">Started Software Engineering and built foundational coding habits.</p></article>
+          <article class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5 hover:-translate-y-1 hover:border-accent transition"><p class="text-accent font-semibold">2026</p><p class="mt-1 text-slate-300">Exploring Data Science, Python, and analytical thinking.</p></article>
+          <article class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5 hover:-translate-y-1 hover:border-accent transition"><p class="text-accent font-semibold">2027</p><p class="mt-1 text-slate-300">Specialization phase with deeper ML workflows and applied projects.</p></article>
+          <article class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5 hover:-translate-y-1 hover:border-accent transition"><p class="text-accent font-semibold">2028</p><p class="mt-1 text-slate-300">Targeting industry + research opportunities in Data Science.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <section class="container">
-    <h2 class="section-title reveal">Skills Evolution</h2>
-    <div class="skills-grid">
-      <div class="card glass reveal"><h3>Beginner</h3><p>C programming, basic problem solving.</p><div class="meter"><span style="width:35%"></span></div></div>
-      <div class="card glass reveal"><h3>Intermediate</h3><p>Python, DSA, project implementation.</p><div class="meter"><span style="width:68%"></span></div></div>
-      <div class="card glass reveal"><h3>Future</h3><p>Machine Learning, Data Science, model deployment.</p><div class="meter"><span style="width:90%"></span></div></div>
-    </div>
-  </section>
+    <section class="py-14" id="roadmap">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 reveal">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold">Dynamic Roadmap</h2>
+          <p class="text-slate-300 mt-2">Core development system powered by time-based phase logic.</p>
+        </div>
+        <div id="progressText" class="text-lg font-semibold text-accent"></div>
+      </div>
+      <div id="roadmapCards" class="mt-7 grid md:grid-cols-3 gap-4"></div>
+    </section>
 
-  
+    <section class="py-14" id="status">
+      <h2 class="text-2xl sm:text-3xl font-semibold reveal">Current Status</h2>
+      <div class="mt-7 grid md:grid-cols-3 gap-4">
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5"><p class="text-slate-400 text-sm">Currently Learning</p><p class="mt-2 font-semibold">Python for Data Analysis + DSA</p></div>
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5"><p class="text-slate-400 text-sm">Currently Building</p><p class="mt-2 font-semibold">Small ML-ready academic project system</p></div>
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 p-5"><p class="text-slate-400 text-sm">Next Goal</p><p class="mt-2 font-semibold">Internship + production-grade data project</p></div>
+      </div>
+      <div class="reveal mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/70 border border-slate-700"><span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-slate-300 text-sm">Live progress tracking active</span></div>
+    </section>
 
-  <section class="container">
-    <div class="vision glass reveal">
-      <h2 class="section-title">Future Vision</h2>
-      <p>I aim to create practical AI solutions through research-backed learning, industry collaboration, and continuous growth—becoming a Data Scientist who builds responsible, high-impact technology.</p>
-    </div>
-  </section>
+    <section class="py-14" id="vision">
+      <div class="reveal rounded-2xl border border-slate-700 bg-panel/70 p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-semibold">Future Vision</h2>
+        <p class="mt-3 text-slate-300">My vision is to become a Data Scientist focused on practical ML systems, research-driven experimentation, and strong industry collaboration while continuously learning and improving.</p>
+      </div>
+    </section>
+
+    <section class="py-20 text-center" id="cta">
+      <a href="#" class="reveal inline-block px-10 py-4 rounded-2xl bg-gradient-to-r from-accent to-accent2 text-lg font-semibold hover:opacity-90 transition">Follow My Journey</a>
+    </section>
+  </main>
 
   <script>
-    const typingEl = document.getElementById('typingText');
-    const lines = ['Building today, for an intelligent tomorrow.', 'From SWE foundations to ML innovation.', 'One semester at a time toward data-driven impact.'];
-    let i = 0, j = 0, deleting = false;
-    function typeLoop() {
-      const text = lines[i];
-      typingEl.textContent = text.slice(0, j);
-      j += deleting ? -1 : 1;
-      if (!deleting && j > text.length) { deleting = true; return setTimeout(typeLoop, 1300); }
-      if (deleting && j < 0) { deleting = false; i = (i + 1) % lines.length; j = 0; }
-      setTimeout(typeLoop, deleting ? 28 : 55);
+    // Typewriter subtitle
+    const heroSub = document.getElementById('heroSub');
+    const subtitle = 'SWE student → Data Science journey';
+    let idx = 0;
+    (function type(){
+      heroSub.textContent = subtitle.slice(0, idx++);
+      if(idx <= subtitle.length) setTimeout(type, 50);
+    })();
+
+    // Scroll progress bar
+    const scrollBar = document.getElementById('scrollBar');
+    function updateScrollBar(){
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+      scrollBar.style.width = p + '%';
     }
-    typeLoop();
+    window.addEventListener('scroll', updateScrollBar, {passive:true});
+    updateScrollBar();
 
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
+    // Reveal animation
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    const progress = document.getElementById('scrollProgress');
-    const timelineFill = document.getElementById('timelineFill');
-    const timeline = document.getElementById('timelineSection');
+    // Dynamic roadmap logic
+    const phases = [
+      { title:'Phase 1: Foundation', desc:'Programming fundamentals, math basics, and SWE core habits.' },
+      { title:'Phase 2: Data Analysis', desc:'Python, Pandas, EDA, visualization, and applied analysis.' },
+      { title:'Phase 3: Machine Learning', desc:'Model building, evaluation, deployment thinking, and research.' }
+    ];
 
-    function updateScrollVisuals() {
-      const y = window.scrollY;
-      const h = document.documentElement.scrollHeight - innerHeight;
-      const p = h > 0 ? (y / h) * 100 : 0;
-      progress.style.width = p + '%';
+    const year = new Date().getFullYear();
+    let currentIndex = 0;
+    if (year < 2026) currentIndex = 0;
+    else if (year <= 2027) currentIndex = 1;
+    else currentIndex = 2;
 
-      const rect = timeline.getBoundingClientRect();
-      const visible = Math.min(Math.max((innerHeight - rect.top) / (rect.height + innerHeight * 0.2), 0), 1);
-      timelineFill.style.height = (visible * 100) + '%';
-    }
+    const roadmapCards = document.getElementById('roadmapCards');
+    const progressText = document.getElementById('progressText');
+    const phaseProgress = [35, 68, 100];
+    progressText.textContent = `Journey Progress: ${phaseProgress[currentIndex]}%`;
 
-    window.addEventListener('scroll', updateScrollVisuals, { passive: true });
-    window.addEventListener('resize', updateScrollVisuals);
-    updateScrollVisuals();
+    phases.forEach((phase, i) => {
+      const state = i < currentIndex ? 'completed' : i === currentIndex ? 'current' : 'upcoming';
+      const card = document.createElement('article');
+      card.className = 'reveal rounded-xl border p-5 transition';
+
+      if (state === 'completed') {
+        card.classList.add('bg-emerald-950/30', 'border-emerald-500/50');
+        card.innerHTML = `<div class="flex items-center justify-between"><h3 class="font-semibold text-emerald-300">${phase.title}</h3><span>✅</span></div><p class="mt-2 text-slate-300">${phase.desc}</p><p class="mt-3 text-emerald-300 text-sm font-medium">Completed</p>`;
+      } else if (state === 'current') {
+        card.classList.add('bg-slate-900/80', 'border-accent', 'shadow-glow');
+        card.innerHTML = `<div class="flex items-center justify-between"><h3 class="font-semibold">${phase.title}</h3><span class="text-xs px-2 py-1 rounded-full bg-accent/20 text-accent">In Progress</span></div><p class="mt-2 text-slate-300">${phase.desc}</p><p class="mt-3 text-accent text-sm font-medium">Current Focus</p>`;
+      } else {
+        card.classList.add('bg-slate-900/40', 'border-slate-700', 'opacity-60');
+        card.innerHTML = `<div class="flex items-center justify-between"><h3 class="font-semibold text-slate-300">${phase.title}</h3><span>⏳</span></div><p class="mt-2 text-slate-400">${phase.desc}</p><p class="mt-3 text-slate-400 text-sm font-medium">Upcoming</p>`;
+      }
+
+      roadmapCards.appendChild(card);
+      io.observe(card);
+    });
   </script>
 </body>
 </html>
