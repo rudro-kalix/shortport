@@ -1,57 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My University Journey</title>
+  <title>My Journey to Data Science</title>
 
-  <!-- Unique Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Merriweather:wght@700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="styles.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: {
+            base: '#050816',
+            panel: 'rgba(16, 24, 48, 0.72)',
+            line: '#2a365d',
+            accent: '#60a5fa',
+            accent2: '#8b5cf6'
+          },
+          boxShadow: {
+            soft: '0 20px 40px rgba(2,8,23,.35)',
+            glow: '0 0 0 1px rgba(96,165,250,.4), 0 0 35px rgba(96,165,250,.18)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: Inter, sans-serif; }
+    .hero-bg {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(96,165,250,.22), transparent 38%),
+        radial-gradient(circle at 82% 10%, rgba(139,92,246,.22), transparent 32%),
+        #050816;
+    }
+    .glass { backdrop-filter: blur(10px); }
+    .typing-caret::after { content: '|'; margin-left: 2px; animation: blink .9s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
 </head>
-<body>
-  <main id="journey">
-    
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-      <div class="scroll-line"></div>
-      <span class="scroll-text">Scroll to explore</span>
-    </div>
 
-    <section class="section">
-      <div class="container">
-        <!-- Header Section -->
-        <div class="journey-header glass">
-          <!-- DIU Logo -->
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Daffodil_International_University_Monogram.svg/1200px-Daffodil_International_University_Monogram.svg.png"
-            alt="Daffodil International University"
-            class="journey-logo"
-            loading="lazy"
-          />
+<body class="hero-bg text-slate-100 antialiased">
+  <div id="scrollProgress" class="fixed top-0 left-0 z-50 h-1 w-0 bg-gradient-to-r from-accent to-accent2"></div>
 
-          <!-- Title + Subtitle -->
-          <div class="journey-title">
-            <h2>My University Journey</h2>
-            <p>BSc in Software Engineering @ Daffodil International University</p>
-          </div>
+  <main class="max-w-6xl mx-auto px-5 sm:px-8">
+    <!-- HERO -->
+    <section class="min-h-screen flex items-center justify-center text-center py-20">
+      <div class="max-w-3xl" data-aos="fade-up">
+        <p class="inline-flex rounded-full border border-slate-700 bg-slate-900/60 px-4 py-1.5 text-sm text-slate-300">Software Engineering Student • Data Science Aspirant</p>
+        <h1 class="mt-6 text-4xl sm:text-6xl font-extrabold leading-tight">My Journey to Data Science</h1>
+        <p id="heroSubtitle" class="typing-caret mt-5 text-lg sm:text-xl text-slate-300 min-h-[2rem]"></p>
+      </div>
+    </section>
+
+    <!-- WHY THIS PATH -->
+    <section class="pb-16" id="why">
+      <div class="glass rounded-2xl border border-slate-700 bg-panel p-6 sm:p-8 shadow-soft" data-aos="fade-up">
+        <h2 class="text-2xl sm:text-3xl font-bold">Why I Chose This Path</h2>
+        <p class="mt-4 text-slate-300 leading-relaxed">I started in Software Engineering to build strong problem-solving fundamentals. Over time, I became fascinated by how data can explain behavior and drive better decisions. My goal is to combine engineering discipline with machine learning to build solutions that are practical, measurable, and impactful.</p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TIMELINE -->
+    <section class="py-16" id="timeline">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="text-3xl sm:text-4xl font-bold">Interactive Timeline</h2>
+        <p class="mt-3 text-slate-300">A live, evolving path from SWE foundations to data-driven impact.</p>
+      </div>
+
+      <div class="relative mt-14">
+        <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-line"></div>
+
+        <div class="space-y-10">
+          <article class="relative grid md:grid-cols-2 items-center" data-aos="fade-up" data-aos-delay="50">
+            <div class="md:pr-10" data-aos="slide-right">
+              <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft md:text-right">
+                <p class="text-accent font-semibold">2025</p>
+                <h3 class="mt-1 text-xl font-bold">Started SWE Journey</h3>
+                <p class="mt-2 text-slate-300">Began Software Engineering in June 2025 at Daffodil International University and built core programming confidence.</p>
+              </div>
+            </div>
+            <div class="hidden md:block"></div>
+            <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid md:grid-cols-2 items-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="hidden md:block"></div>
+            <div class="md:pl-10" data-aos="slide-left">
+              <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft">
+                <p class="text-accent font-semibold">2026</p>
+                <h3 class="mt-1 text-xl font-bold">Exploring Data Science</h3>
+                <p class="mt-2 text-slate-300">Focused on Python, statistics, and data analysis workflows while continuing strong DSA practice.</p>
+              </div>
+            </div>
+            <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent2 ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid md:grid-cols-2 items-center" data-aos="fade-up" data-aos-delay="150">
+            <div class="md:pr-10" data-aos="slide-right">
+              <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft md:text-right">
+                <p class="text-accent font-semibold">2027</p>
+                <h3 class="mt-1 text-xl font-bold">Specialization Phase</h3>
+                <p class="mt-2 text-slate-300">Building machine learning projects and strengthening model evaluation, experimentation, and storytelling with data.</p>
+              </div>
+            </div>
+            <div class="hidden md:block"></div>
+            <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid md:grid-cols-2 items-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="hidden md:block"></div>
+            <div class="md:pl-10" data-aos="slide-left">
+              <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft">
+                <p class="text-accent font-semibold">2028</p>
+                <h3 class="mt-1 text-xl font-bold">Industry + Research Goal</h3>
+                <p class="mt-2 text-slate-300">Targeting internships or full-time roles where I can ship real ML solutions and contribute to research-backed innovation.</p>
+              </div>
+            </div>
+            <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent2 ring-4 ring-base"></span>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <!-- Timeline placeholder -->
-        <div id="journeyTimeline"></div>
+    <!-- FUTURE ROADMAP -->
+    <section class="py-16" id="roadmap">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="text-3xl sm:text-4xl font-bold">Future Roadmap</h2>
+        <p class="mt-3 text-slate-300">Clear priorities for the next three years.</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-3" data-aos="fade-up" data-aos-delay="120">
+        <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft hover:-translate-y-1 hover:shadow-glow transition">
+          <p class="text-accent font-semibold">2026</p>
+          <h3 class="mt-1 text-xl font-bold">Python + Data Analysis</h3>
+          <p class="mt-2 text-slate-300">Deep mastery of Python data stack, exploratory analysis, and analytical communication.</p>
+        </div>
+        <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft hover:-translate-y-1 hover:shadow-glow transition">
+          <p class="text-accent font-semibold">2027</p>
+          <h3 class="mt-1 text-xl font-bold">Machine Learning Projects</h3>
+          <p class="mt-2 text-slate-300">Project-first learning through end-to-end ML builds, validation, and iteration.</p>
+        </div>
+        <div class="glass rounded-xl border border-slate-700 bg-panel p-6 shadow-soft hover:-translate-y-1 hover:shadow-glow transition">
+          <p class="text-accent font-semibold">2028</p>
+          <h3 class="mt-1 text-xl font-bold">Internship / Job</h3>
+          <p class="mt-2 text-slate-300">Transition into industry with production-ready portfolio evidence and strong collaboration skills.</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Shared site logic (theme, links, etc.) -->
-  <script src="script.js"></script>
-  <!-- Journey JS -->
-  <script src="journey.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+
+    const subtitle = 'From Software Engineering fundamentals to impactful Data Science solutions.';
+    const subtitleEl = document.getElementById('heroSubtitle');
+    let i = 0;
+    (function type(){
+      subtitleEl.textContent = subtitle.slice(0, i++);
+      if (i <= subtitle.length) setTimeout(type, 38);
+      else subtitleEl.classList.remove('typing-caret');
+    })();
+
+    const progress = document.getElementById('scrollProgress');
+    function updateProgress(){
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = p + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
 </body>
 </html>
