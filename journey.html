@@ -1,57 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My University Journey</title>
-
-  <!-- Unique Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Merriweather:wght@700;900&family=Pacifico&display=swap" rel="stylesheet">
-
-  
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="styles.css">
+  <title>My Journey to Data Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: { base:'#050816', panel:'#0f172a', accent:'#60a5fa', accent2:'#8b5cf6' },
+          boxShadow: { soft:'0 10px 30px rgba(2,8,23,.35)' }
+        }
+      }
+    };
+  </script>
+  <style>
+    body{font-family:Inter,sans-serif}
+    .bgfx{background:radial-gradient(circle at 15% 10%,rgba(96,165,250,.16),transparent 35%),radial-gradient(circle at 85% 8%,rgba(139,92,246,.16),transparent 30%),#050816}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;will-change:transform,opacity}
+    .reveal.in{opacity:1;transform:translateY(0)}
+    .typing::after{content:'|';margin-left:2px;animation:blink .9s infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
 </head>
-<body>
-  <main id="journey">
-    
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-      <div class="scroll-line"></div>
-      <span class="scroll-text">Scroll to explore</span>
-    </div>
+<body class="bgfx text-slate-100 antialiased">
+  <div id="progress" class="fixed top-0 left-0 h-1 w-0 z-50 bg-gradient-to-r from-accent to-accent2"></div>
 
-    <section class="section">
-      <div class="container">
-        <!-- Header Section -->
-        <div class="journey-header glass">
-          <!-- DIU Logo -->
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Daffodil_International_University_Monogram.svg/1200px-Daffodil_International_University_Monogram.svg.png"
-            alt="Daffodil International University"
-            class="journey-logo"
-            loading="lazy"
-          />
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="min-h-[86vh] flex items-center justify-center text-center py-16 sm:py-20">
+      <div class="max-w-3xl reveal">
+        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">My Journey to Data Science</h1>
+        <p id="subtitle" class="typing mt-4 text-base sm:text-xl text-slate-300 min-h-[1.75rem]"></p>
+      </div>
+    </section>
 
-          <!-- Title + Subtitle -->
-          <div class="journey-title">
-            <h2>My University Journey</h2>
-            <p>BSc in Software Engineering @ Daffodil International University</p>
-          </div>
+    <section id="why" class="pb-12 sm:pb-16">
+      <div class="reveal rounded-2xl border border-slate-700/80 bg-panel/70 backdrop-blur p-5 sm:p-8 shadow-soft">
+        <h2 class="text-2xl sm:text-3xl font-bold">Why I Chose This Path</h2>
+        <p class="mt-3 text-slate-300 leading-relaxed">I started in Software Engineering to build strong fundamentals, then discovered how data and machine learning can solve real-world problems at scale. My mission is to merge engineering discipline with data-driven intelligence.</p>
+      </div>
+    </section>
+
+    <section id="timeline" class="py-12 sm:py-16">
+      <div class="text-center reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold">Interactive Timeline</h2>
+        <p class="mt-2 text-slate-300">A focused progression from SWE foundations to DS career readiness.</p>
+      </div>
+
+      <div class="relative mt-10 sm:mt-14">
+        <div class="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-slate-700"></div>
+
+        <div class="space-y-6 sm:space-y-8">
+          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
+            <div class="sm:pr-10 sm:text-right ml-10 sm:ml-0">
+              <div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2025</p><h3 class="font-bold text-xl mt-1">Started SWE</h3><p class="text-slate-300 mt-2">Joined SWE in June 2025 and built core coding and problem-solving skills.</p></div>
+            </div><div class="hidden sm:block"></div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
+            <div class="hidden sm:block"></div><div class="sm:pl-10 ml-10 sm:ml-0">
+              <div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2026</p><h3 class="font-bold text-xl mt-1">Exploring Data Science</h3><p class="text-slate-300 mt-2">Developing Python, statistics, and data analysis capability through projects.</p></div>
+            </div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent2 ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
+            <div class="sm:pr-10 sm:text-right ml-10 sm:ml-0"><div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2027</p><h3 class="font-bold text-xl mt-1">Specialization</h3><p class="text-slate-300 mt-2">Building ML projects, experimentation habits, and model evaluation depth.</p></div></div>
+            <div class="hidden sm:block"></div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-base"></span>
+          </article>
+
+          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
+            <div class="hidden sm:block"></div><div class="sm:pl-10 ml-10 sm:ml-0"><div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2028</p><h3 class="font-bold text-xl mt-1">Industry / Research Goal</h3><p class="text-slate-300 mt-2">Aiming for internship or full-time DS/ML role with portfolio-backed impact.</p></div></div>
+            <span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent2 ring-4 ring-base"></span>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <!-- Timeline placeholder -->
-        <div id="journeyTimeline"></div>
+    <section id="roadmap" class="py-12 sm:py-16">
+      <div class="text-center reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold">Future Roadmap</h2>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2026</p><h3 class="mt-1 font-bold text-xl">Python + Data Analysis</h3><p class="mt-2 text-slate-300">Build fluency in data wrangling, EDA, and insight communication.</p></div>
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2027</p><h3 class="mt-1 font-bold text-xl">Machine Learning Projects</h3><p class="mt-2 text-slate-300">Create end-to-end ML solutions from data prep to evaluation.</p></div>
+        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft sm:col-span-2 lg:col-span-1"><p class="text-accent font-semibold">2028</p><h3 class="mt-1 font-bold text-xl">Internship / Job</h3><p class="mt-2 text-slate-300">Transition into industry with a polished, recruiter-ready portfolio.</p></div>
       </div>
     </section>
   </main>
 
-  <!-- Shared site logic (theme, links, etc.) -->
-  <script src="script.js"></script>
-  <!-- Journey JS -->
-  <script src="journey.js"></script>
+  <script>
+    const text = 'SWE student evolving into a Data Scientist through focused, project-driven growth.';
+    const subtitle = document.getElementById('subtitle');
+    let ti = 0;
+    (function type(){ subtitle.textContent = text.slice(0, ti++); if (ti <= text.length) setTimeout(type, 28); else subtitle.classList.remove('typing'); })();
+
+    const progress = document.getElementById('progress');
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = ((window.scrollY / Math.max(max,1)) * 100) + '%';
+    };
+    window.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
+    update();
+
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+    }, {threshold:0.14, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
 </body>
 </html>
