@@ -1,8 +1,36 @@
 [
-  { "title": "AuraUI — Minimal UI Kit", "live": "https://example.com/aura-ui" },
-  { "title": "Tasklight — Focus Timer", "live": "https://example.com/tasklight" }
-
-  /* Add more like this:
-  ,{ "title": "New Project Name", "live": "https://your-live-link.com" }
-  */
+  {
+    "title": "Digiplus",
+    "eyebrow": "Digital marketplace",
+    "description": "A polished subscription marketplace focused on clear product discovery and instant digital delivery.",
+    "tech": ["TypeScript", "Product UI", "Commerce"],
+    "live": "https://digiplus-smoky.vercel.app",
+    "repo": "https://github.com/rudro-kalix/Digiplus",
+    "tone": "violet"
+  },
+  {
+    "title": "Payment Gateway",
+    "eyebrow": "Workflow automation",
+    "description": "A verification workflow designed to reduce manual checks and help customer messages move faster.",
+    "tech": ["TypeScript", "Automation", "APIs"],
+    "repo": "https://github.com/rudro-kalix/payment-gateway",
+    "tone": "acid"
+  },
+  {
+    "title": "Complaint Management",
+    "eyebrow": "University system",
+    "description": "A structured complaint management system developed with Team ResolveX for a complex engineering project.",
+    "tech": ["C", "Systems", "Team project"],
+    "repo": "https://github.com/rudro-kalix/complaint-management-system",
+    "tone": "coral"
+  },
+  {
+    "title": "SGPA Calculator",
+    "eyebrow": "Student utility",
+    "description": "A focused academic calculator that turns semester results into an immediate, understandable SGPA.",
+    "tech": ["JavaScript", "UX", "Education"],
+    "live": "https://sgpa-calculator-lemon.vercel.app",
+    "repo": "https://github.com/rudro-kalix/sgpa-calculator",
+    "tone": "sky"
+  }
 ]

@@ -1,120 +1,108 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Journey to Data Science</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1ea">
+  <title>Learning Journey — Rudro</title>
+  <meta name="description" content="Rudro’s software engineering and data science learning journey at Daffodil International University.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { inter: ['Inter', 'sans-serif'] },
-          colors: { base:'#050816', panel:'#0f172a', accent:'#60a5fa', accent2:'#8b5cf6' },
-          boxShadow: { soft:'0 10px 30px rgba(2,8,23,.35)' }
-        }
-      }
-    };
-  </script>
-  <style>
-    body{font-family:Inter,sans-serif}
-    .bgfx{background:radial-gradient(circle at 15% 10%,rgba(96,165,250,.16),transparent 35%),radial-gradient(circle at 85% 8%,rgba(139,92,246,.16),transparent 30%),#050816}
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;will-change:transform,opacity}
-    .reveal.in{opacity:1;transform:translateY(0)}
-    .typing::after{content:'|';margin-left:2px;animation:blink .9s infinite}
-    @keyframes blink{50%{opacity:0}}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bgfx text-slate-100 antialiased">
-  <div id="progress" class="fixed top-0 left-0 h-1 w-0 z-50 bg-gradient-to-r from-accent to-accent2"></div>
+<body class="journey-page">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <section class="min-h-[86vh] flex items-center justify-center text-center py-16 sm:py-20">
-      <div class="max-w-3xl reveal">
-        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">My Journey to Data Science</h1>
-        <p id="subtitle" class="typing mt-4 text-base sm:text-xl text-slate-300 min-h-[1.75rem]"></p>
+  <header class="site-header is-scrolled">
+    <a class="brand" href="index.html" aria-label="Rudro, back to home">
+      <span class="brand-mark">R</span>
+      <span class="brand-name">Rudro</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="journey.html" aria-current="page">Journey</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-button" id="themeButton" type="button" aria-label="Switch color theme"><span aria-hidden="true">◐</span></button>
+      <a class="header-contact" href="index.html">Back home <span aria-hidden="true">↙</span></a>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span class="sr-only">Open menu</span></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html">Home</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+  </header>
+
+  <main class="journey-main" id="main">
+    <section class="journey-hero section-shell">
+      <div class="journey-hero-copy reveal">
+        <p class="section-kicker">Learning log / 2025 onward</p>
+        <h1>Still learning.<br><em>Always building.</em></h1>
+        <p>This is a living record of my path through software engineering — from the fundamentals I’m studying now to the data-driven systems I want to build next.</p>
+      </div>
+      <aside class="journey-stat reveal" aria-label="Academic highlight">
+        <strong>3.73</strong>
+        <span>First-semester SGPA</span>
+      </aside>
+    </section>
+
+    <section class="journey-section section-shell" id="timeline">
+      <div class="journey-section-head reveal">
+        <h2>Milestones,<br><em>not shortcuts.</em></h2>
+        <p>Progress is more useful when it is honest. These are the academic moments and learning shifts that have shaped the direction so far.</p>
+      </div>
+      <div class="timeline" id="journeyTimeline" aria-live="polite">
+        <article class="timeline-item"><p>Loading the journey…</p></article>
       </div>
     </section>
 
-    <section id="why" class="pb-12 sm:pb-16">
-      <div class="reveal rounded-2xl border border-slate-700/80 bg-panel/70 backdrop-blur p-5 sm:p-8 shadow-soft">
-        <h2 class="text-2xl sm:text-3xl font-bold">Why I Chose This Path</h2>
-        <p class="mt-3 text-slate-300 leading-relaxed">I started in Software Engineering to build strong fundamentals, then discovered how data and machine learning can solve real-world problems at scale. My mission is to merge engineering discipline with data-driven intelligence.</p>
+    <section class="journey-section section-shell" id="roadmap">
+      <div class="journey-section-head reveal">
+        <h2>What comes<br><em>next.</em></h2>
+        <p>A direction, not a rigid checklist: deepen the foundations, build evidence through projects, and turn curiosity into professional capability.</p>
+      </div>
+      <div class="roadmap-grid">
+        <article class="roadmap-card reveal">
+          <span>Now / Foundation</span>
+          <h3>Data fluency</h3>
+          <p>Strengthen Python, statistics, data cleaning, and clear analytical communication.</p>
+        </article>
+        <article class="roadmap-card reveal">
+          <span>Next / Practice</span>
+          <h3>Applied ML</h3>
+          <p>Build end-to-end projects that connect a real question to a measurable model.</p>
+        </article>
+        <article class="roadmap-card reveal">
+          <span>Goal / Impact</span>
+          <h3>Industry work</h3>
+          <p>Contribute to a team where software and data create useful, dependable outcomes.</p>
+        </article>
       </div>
     </section>
 
-    <section id="timeline" class="py-12 sm:py-16">
-      <div class="text-center reveal">
-        <h2 class="text-3xl sm:text-4xl font-bold">Interactive Timeline</h2>
-        <p class="mt-2 text-slate-300">A focused progression from SWE foundations to DS career readiness.</p>
-      </div>
-
-      <div class="relative mt-10 sm:mt-14">
-        <div class="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-slate-700"></div>
-
-        <div class="space-y-6 sm:space-y-8">
-          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
-            <div class="sm:pr-10 sm:text-right ml-10 sm:ml-0">
-              <div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2025</p><h3 class="font-bold text-xl mt-1">Started SWE</h3><p class="text-slate-300 mt-2">Joined SWE in June 2025 and built core coding and problem-solving skills.</p></div>
-            </div><div class="hidden sm:block"></div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-base"></span>
-          </article>
-
-          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
-            <div class="hidden sm:block"></div><div class="sm:pl-10 ml-10 sm:ml-0">
-              <div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2026</p><h3 class="font-bold text-xl mt-1">Exploring Data Science</h3><p class="text-slate-300 mt-2">Developing Python, statistics, and data analysis capability through projects.</p></div>
-            </div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent2 ring-4 ring-base"></span>
-          </article>
-
-          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
-            <div class="sm:pr-10 sm:text-right ml-10 sm:ml-0"><div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2027</p><h3 class="font-bold text-xl mt-1">Specialization</h3><p class="text-slate-300 mt-2">Building ML projects, experimentation habits, and model evaluation depth.</p></div></div>
-            <div class="hidden sm:block"></div><span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-base"></span>
-          </article>
-
-          <article class="relative grid sm:grid-cols-2 gap-4 sm:gap-8 items-center reveal">
-            <div class="hidden sm:block"></div><div class="sm:pl-10 ml-10 sm:ml-0"><div class="rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2028</p><h3 class="font-bold text-xl mt-1">Industry / Research Goal</h3><p class="text-slate-300 mt-2">Aiming for internship or full-time DS/ML role with portfolio-backed impact.</p></div></div>
-            <span class="absolute left-4 sm:left-1/2 top-8 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-1/2 h-3.5 w-3.5 rounded-full bg-accent2 ring-4 ring-base"></span>
-          </article>
+    <section class="contact section-shell reveal">
+      <p class="section-kicker">Keep in touch</p>
+      <div class="contact-row">
+        <h2>Follow the work<br><em>as it grows.</em></h2>
+        <div class="contact-actions">
+          <p>The best proof of learning is what gets built. GitHub is where the experiments, assignments, and finished work continue.</p>
+          <a class="email-link" href="https://github.com/rudro-kalix" target="_blank" rel="noreferrer">Open GitHub profile <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
-
-    <section id="roadmap" class="py-12 sm:py-16">
-      <div class="text-center reveal">
-        <h2 class="text-3xl sm:text-4xl font-bold">Future Roadmap</h2>
-      </div>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2026</p><h3 class="mt-1 font-bold text-xl">Python + Data Analysis</h3><p class="mt-2 text-slate-300">Build fluency in data wrangling, EDA, and insight communication.</p></div>
-        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft"><p class="text-accent font-semibold">2027</p><h3 class="mt-1 font-bold text-xl">Machine Learning Projects</h3><p class="mt-2 text-slate-300">Create end-to-end ML solutions from data prep to evaluation.</p></div>
-        <div class="reveal rounded-xl border border-slate-700 bg-panel/70 backdrop-blur p-5 shadow-soft sm:col-span-2 lg:col-span-1"><p class="text-accent font-semibold">2028</p><h3 class="mt-1 font-bold text-xl">Internship / Job</h3><p class="mt-2 text-slate-300">Transition into industry with a polished, recruiter-ready portfolio.</p></div>
-      </div>
-    </section>
-
-    <section class="py-20 text-center" id="cta">
-      <a href="#" class="reveal inline-block px-10 py-4 rounded-2xl bg-gradient-to-r from-accent to-accent2 text-lg font-semibold hover:opacity-90 transition">Follow My Journey</a>
-    </section>
   </main>
 
-  <script>
-    const text = 'SWE student evolving into a Data Scientist through focused, project-driven growth.';
-    const subtitle = document.getElementById('subtitle');
-    let ti = 0;
-    (function type(){ subtitle.textContent = text.slice(0, ti++); if (ti <= text.length) setTimeout(type, 28); else subtitle.classList.remove('typing'); })();
+  <footer class="site-footer">
+    <div class="footer-brand"><span class="brand-mark">R</span><strong>Rudro</strong></div>
+    <p>Learning in public, one project at a time.</p>
+    <nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="mailto:252-35-584@diu.edu.bd">Email ↗</a></nav>
+    <small>© <span id="year"></span> Julkar Nayen Bin Hossain</small>
+  </footer>
 
-    const progress = document.getElementById('progress');
-    const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = ((window.scrollY / Math.max(max,1)) * 100) + '%';
-    };
-    window.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
-    update();
-
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
-    }, {threshold:0.14, rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-  </script>
+  <script defer src="script.js"></script>
+  <script defer src="journey.js"></script>
 </body>
 </html>
