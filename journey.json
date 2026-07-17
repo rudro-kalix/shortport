@@ -2,28 +2,28 @@
   {
     "milestone": "University Journey Begins",
     "date": "May 2025",
-    "label": "Chapter 01",
-    "note": "Enrolled in the BSc Software Engineering program at Daffodil International University and began building a structured foundation in computing and product thinking."
+    "note": "Enrolled in BSc Software Engineering at Daffodil International University. Excited to start my journey in the world of technology and innovation.",
+    "icon": "graduation-cap"
   },
   {
     "milestone": "First Semester Completed",
     "date": "Summer 2025",
-    "label": "Chapter 02",
-    "note": "Completed the first semester with an SGPA of 3.73, establishing a strong base across computer fundamentals and software engineering concepts.",
+    "note": "Successfully completed my first semester with a strong SGPA of 3.73. Gained solid foundation in computer fundamentals and software engineering concepts.",
+    "icon": "trophy",
     "sgpa": 3.73,
-    "total_credit": 13,
+    "total_credit": 13.00,
     "courses": [
-      { "code": "SE 111", "title": "Computer Fundamentals", "credit": 3, "grade": "A", "point": 3.75 },
-      { "code": "BNS 101", "title": "Bangladesh Studies", "credit": 3, "grade": "A−", "point": 3.5 },
-      { "code": "SE 112", "title": "Computer Fundamentals Lab", "credit": 1, "grade": "A−", "point": 3.5 },
-      { "code": "SE 113", "title": "Introduction to Software Engineering", "credit": 3, "grade": "A+", "point": 4 },
-      { "code": "ENG 101", "title": "English I", "credit": 3, "grade": "A", "point": 3.75 }
+      { "sl": 1, "code": "SE 111", "title": "Computer Fundamentals", "credit": 3.00, "grade": "A", "point": 3.75 },
+      { "sl": 2, "code": "BNS 101", "title": "Bangladesh Studies", "credit": 3.00, "grade": "A–", "point": 3.50 },
+      { "sl": 3, "code": "SE 112", "title": "Computer Fundamentals Lab", "credit": 1.00, "grade": "A–", "point": 3.50 },
+      { "sl": 4, "code": "SE 113", "title": "Introduction to Software Engineering", "credit": 3.00, "grade": "A+", "point": 4.00 },
+      { "sl": 5, "code": "ENG 101", "title": "English I", "credit": 3.00, "grade": "A", "point": 3.75 }
     ]
   },
   {
-    "milestone": "The Next Semester Starts",
+    "milestone": "Second Semester Ongoing",
     "date": "Fall 2025",
-    "label": "Chapter 03",
-    "note": "Moved into deeper programming practice, data structures, and project-based work — with a growing interest in Python, data, and machine learning."
+    "note": "Currently studying in my second semester, focusing on programming languages, data structures, and building practical skills. Working hard to maintain and improve my academic performance.",
+    "icon": "book-open"
   }
 ]

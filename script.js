@@ -1,163 +1,205 @@
-const SELECTED_PROJECTS = [
-  {
-    title: "Digiplus",
-    eyebrow: "Digital marketplace",
-    description: "A polished subscription marketplace focused on clear product discovery and instant digital delivery.",
-    tech: ["TypeScript", "Product UI", "Commerce"],
-    live: "https://digiplus-smoky.vercel.app",
-    repo: "https://github.com/rudro-kalix/Digiplus",
-    tone: "violet"
-  },
-  {
-    title: "Payment Gateway",
-    eyebrow: "Workflow automation",
-    description: "A verification workflow designed to reduce manual checks and help customer messages move faster.",
-    tech: ["TypeScript", "Automation", "APIs"],
-    repo: "https://github.com/rudro-kalix/payment-gateway",
-    tone: "acid"
-  },
-  {
-    title: "Complaint Management",
-    eyebrow: "University system",
-    description: "A structured complaint management system developed with Team ResolveX for a complex engineering project.",
-    tech: ["C", "Systems", "Team project"],
-    repo: "https://github.com/rudro-kalix/complaint-management-system",
-    tone: "coral"
-  },
-  {
-    title: "SGPA Calculator",
-    eyebrow: "Student utility",
-    description: "A focused academic calculator that turns semester results into an immediate, understandable SGPA.",
-    tech: ["JavaScript", "UX", "Education"],
-    live: "https://sgpa-calculator-lemon.vercel.app",
-    repo: "https://github.com/rudro-kalix/sgpa-calculator",
-    tone: "sky"
+const LINKS = {
+  fullPortfolio: "https://www.imrudro.dev/",
+  socials: {
+    github: "https://github.com/rudro-kalix",
+    linkedin: "https://www.portfolio.ovairal.xyz/404.html",
+    twitter: "https://www.portfolio.ovairal.xyz/404.html",
+    facebook: "https://www.facebook.com/nazmunxn",
+    whatsapp: "https://wa.me/+8801607656890",
+    email: "mailto:252-35-584@diu.edu.bd"
   }
+};
+
+let PROJECTS = [
+  { title: "AuraUI — Minimal UI Kit", live: "#" },
+  { title: "Tasklight — Focus Timer", live: "#" },
+  { title: "DataViz Pro", live: "#" },
+  { title: "SecureNet Scanner", live: "#" }
 ];
 
-const escapeHTML = (value) => String(value)
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;")
-  .replaceAll("'", "&#039;");
+const $ = s => document.querySelector(s);
 
-function renderProjects(projects) {
-  const grid = document.querySelector("#projectGrid");
+function setLinks() {
+  $("#portfolioLink").href = LINKS.fullPortfolio;
+  $("#githubLink").href = LINKS.socials.github;
+  $("#linkedinLink").href = LINKS.socials.linkedin;
+  $("#twitterLink").href = LINKS.socials.twitter;
+  const fb = $("#facebookLink"); if (fb) fb.href = LINKS.socials.facebook;
+  const wa = $("#whatsappLink"); if (wa) wa.href = LINKS.socials.whatsapp;
+  const el = $("#emailLink"); if (el) el.href = LINKS.socials.email;
+  const cta = $("#emailCta"); if (cta) cta.href = LINKS.socials.email;
+}
+
+function yearStamp() {
+  const y = $("#year");
+  if (y) y.textContent = new Date().getFullYear();
+}
+
+function renderProjects(list = PROJECTS) {
+  const grid = $("#projectsGrid");
   if (!grid) return;
-
-  grid.innerHTML = projects.map((project, index) => {
-    const destination = project.live || project.repo;
-    const primaryLabel = project.live ? "View live project" : "View repository";
-    const secondaryLink = project.live && project.repo
-      ? `<a class="project-repo" href="${escapeHTML(project.repo)}" target="_blank" rel="noreferrer">Code ↗</a>`
-      : "";
-    const tags = (project.tech || []).map((tag) => `<li>${escapeHTML(tag)}</li>`).join("");
-
-    return `
-      <article class="project-card project-${escapeHTML(project.tone || "violet")} reveal">
-        <div class="project-topline">
-          <span>${String(index + 1).padStart(2, "0")}</span>
-          <span>${escapeHTML(project.eyebrow)}</span>
-        </div>
-        <div class="project-graphic" aria-hidden="true"><span>${escapeHTML(project.title.charAt(0))}</span></div>
-        <div class="project-content">
-          <h3>${escapeHTML(project.title)}</h3>
-          <p>${escapeHTML(project.description)}</p>
-          <ul class="project-tags">${tags}</ul>
-        </div>
-        <div class="project-links">
-          <a class="project-primary" href="${escapeHTML(destination)}" target="_blank" rel="noreferrer">${primaryLabel} <span aria-hidden="true">↗</span></a>
-          ${secondaryLink}
-        </div>
-      </article>`;
-  }).join("");
-
-  observeReveals(grid);
-}
-
-async function loadProjects() {
-  try {
-    const response = await fetch("projects.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Unable to load selected projects");
-    const projects = await response.json();
-    renderProjects(Array.isArray(projects) && projects.length ? projects : SELECTED_PROJECTS);
-  } catch {
-    renderProjects(SELECTED_PROJECTS);
-  }
-}
-
-function initTheme() {
-  const button = document.querySelector("#themeButton");
-  const stored = localStorage.getItem("rudro-theme");
-  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  const initial = stored || preferred;
-
-  document.documentElement.dataset.theme = initial;
-  if (!button) return;
-  button.setAttribute("aria-label", initial === "dark" ? "Switch to light theme" : "Switch to dark theme");
-
-  button.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("rudro-theme", next);
-    button.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
-  });
-}
-
-function initMenu() {
-  const button = document.querySelector("#menuButton");
-  const menu = document.querySelector("#mobileNav");
-  if (!button || !menu) return;
-
-  const close = () => {
-    button.setAttribute("aria-expanded", "false");
-    menu.hidden = true;
-  };
-
-  button.addEventListener("click", () => {
-    const isOpen = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!isOpen));
-    menu.hidden = isOpen;
-  });
-  menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
-  window.addEventListener("resize", () => { if (window.innerWidth > 760) close(); });
-}
-
-let revealObserver;
-function observeReveals(scope = document) {
-  const elements = scope.querySelectorAll(".reveal:not(.is-visible)");
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    elements.forEach((element) => element.classList.add("is-visible"));
+  grid.innerHTML = "";
+  if (!list || !list.length) {
+    const empty = document.createElement('div');
+    empty.className = 'card';
+    empty.innerHTML = `<h3>No projects to show</h3><p style="color:var(--muted)">Please check back soon.</p>`;
+    grid.appendChild(empty);
     return;
   }
-
-  if (!revealObserver) {
-    revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -48px" });
-  }
-  elements.forEach((element) => revealObserver.observe(element));
+  list.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    const live = (p.live || '#');
+    const desc = p.description ? `<p class="project-desc">${escapeHtml(p.description)}</p>` : '';
+    const language = p.language ? `<span class="badge badge--lang">${escapeHtml(p.language)}</span>` : '';
+    const stars = typeof p.stars === 'number' && p.stars > 0 ? `<span class="badge" title="Stars">★ ${p.stars}</span>` : '';
+    const updated = p.updated_at ? `<span class="badge badge--muted" title="Last updated">${timeAgo(p.updated_at)}</span>` : '';
+    const meta = (language || stars || updated) ? `<div class="project-meta">${language}${stars}${updated}</div>` : '';
+    card.innerHTML = `
+      <h3>${escapeHtml(p.title)}</h3>
+      ${desc}
+      ${meta}
+      <a class="btn" href="${live}" target="_blank" rel="noopener">Open</a>
+    `;
+    grid.appendChild(card);
+  });
 }
 
-function initHeader() {
-  const header = document.querySelector(".site-header");
-  if (!header) return;
-  const update = () => header.classList.toggle("is-scrolled", window.scrollY > 20);
-  window.addEventListener("scroll", update, { passive: true });
-  update();
+function attachSearch() {
+  const input = $("#searchInput");
+  if (!input) return;
+  input.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    const filtered = PROJECTS.filter(p =>
+      (p.title || "").toLowerCase().includes(q)
+    );
+    renderProjects(filtered);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#year").textContent = new Date().getFullYear();
-  initTheme();
-  initMenu();
-  initHeader();
-  observeReveals();
-  loadProjects();
+// Smooth scrolling for same-page hash links (ignore external or "#")
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (!href || href === '#') return; // let normal behavior
+    if (!href.startsWith('#')) return; // not a same-page hash anymore
+    const target = document.querySelector(href);
+    if (!target) return; // no target, let default
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  setLinks();
+  yearStamp();
+  renderProjects();
+  attachSearch();
+  // Force dark theme and remove toggle
+  document.documentElement.classList.remove('theme-light');
+  attachContactForm();
+  // Load GitHub repositories and refresh the projects grid when ready
+  loadGitHubRepos('rudro-kalix');
+});
+
+// -------- Theme toggle --------
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('theme-light');
+    setToggleIcon('light');
+  } else {
+    document.documentElement.classList.remove('theme-light');
+    setToggleIcon('dark');
+  }
+}
+
+function wireThemeToggle() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('theme-light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    setToggleIcon(isLight ? 'light' : 'dark');
+  });
+}
+
+function setToggleIcon(mode) {
+  const icon = document.querySelector('#themeToggle .theme-icon');
+  if (!icon) return;
+  icon.textContent = mode === 'light' ? '☀️' : '🌙';
+}
+
+// Contact form: fallback to mailto if no backend
+function attachContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cfName')?.value?.trim() || '';
+    const email = document.getElementById('cfEmail')?.value?.trim() || '';
+    const message = document.getElementById('cfMessage')?.value?.trim() || '';
+    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:252-35-584@diu.edu.bd?subject=${subject}&body=${body}`;
+  });
+}
+
+// -------- Load GitHub projects --------
+async function loadGitHubRepos(username = 'rudro-kalix') {
+  try {
+    const resp = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=9`);
+    if (!resp.ok) throw new Error('GitHub API error');
+    const repos = await resp.json();
+    const mapped = (repos || [])
+      .filter(r => !r.fork)
+      .map(r => ({
+        title: r.name,
+        live: r.homepage && r.homepage.trim() ? r.homepage : r.html_url,
+        description: r.description || '',
+        language: r.language || '',
+        stars: r.stargazers_count || 0,
+        updated_at: r.pushed_at || r.updated_at || r.created_at
+      }));
+    if (mapped.length) {
+      PROJECTS = mapped;
+      renderProjects(PROJECTS);
+    } else {
+      // keep defaults
+      renderProjects(PROJECTS);
+    }
+  } catch (e) {
+    // Leave default projects on failure
+    console.warn('Failed to load GitHub repos:', e);
+    renderProjects(PROJECTS);
+  }
+}
+
+// Utilities
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function timeAgo(iso) {
+  try {
+    const then = new Date(iso);
+    const now = new Date();
+    const s = Math.floor((now - then) / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
+    const mo = Math.floor(d / 30);
+    const y = Math.floor(d / 365);
+    if (y > 0) return `${y}y ago`;
+    if (mo > 0) return `${mo}mo ago`;
+    if (d > 0) return `${d}d ago`;
+    if (h > 0) return `${h}h ago`;
+    if (m > 0) return `${m}m ago`;
+    return `just now`;
+  } catch { return ''; }
+}
